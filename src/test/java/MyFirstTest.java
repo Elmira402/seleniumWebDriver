@@ -30,6 +30,14 @@ public class MyFirstTest {
         Assert.assertEquals(webDriver.getTitle(), "webDriver - Поиск в Google");
     }
 
+    @Test
+    public void loginLiteCartAdminTest(){
+        webDriver.get("http://localhost/litecart/admin/");
+        webDriver.findElement(By.name("username")).sendKeys("admin");
+        webDriver.findElement(By.name("password")).sendKeys("admin");
+        webDriver.findElement(By.name("login")).click();
+    }
+
     @AfterClass
     public static void stop(){
         webDriver.quit();
