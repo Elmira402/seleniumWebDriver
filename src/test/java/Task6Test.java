@@ -1,4 +1,5 @@
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -30,16 +31,16 @@ public class Task6Test {
         By menuSubItemsXpath = By.xpath("//ul[@class='docs']//span[@class='name']");
         By headerXpath = By.xpath("//h1");
 
-        areElementsPresent(webDriver, menuItemsXpath);
+        Assert.assertTrue("Не найдены элементы пунктов в меню", areElementsPresent(webDriver, menuItemsXpath));
         List<String> itemNames = getTextFromElements(webDriver, menuItemsXpath);
         itemNames.forEach(itemName -> {
             webDriver.findElement(getMenuElementByText(itemName)).click();
-            isElementPresent(webDriver, headerXpath);
+            Assert.assertTrue("Не найден элемент заголовка раздела ".concat(itemName), isElementPresent(webDriver, headerXpath));
             if (areElementsPresent(webDriver, menuSubItemsXpath)) {
                 List<String> subRegistryNames = getTextFromElements(webDriver, menuSubItemsXpath);
                 subRegistryNames.forEach(subRegistryName -> {
                     webDriver.findElement(getMenuElementByText(subRegistryName)).click();
-                    isElementPresent(webDriver, headerXpath);
+                    Assert.assertTrue("Не найден элемент заголовка подраздела ".concat(subRegistryName),isElementPresent(webDriver, headerXpath));
                 });
             }
         });
@@ -55,7 +56,7 @@ public class Task6Test {
     }
 
     boolean areElementsPresent(WebDriver driver, By locator) {
-        return driver.findElements(locator).size() > 0;
+        return !driver.findElements(locator).isEmpty();
     }
 
     List<String> getTextFromElements(WebDriver driver, By locator) {
