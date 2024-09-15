@@ -50,7 +50,7 @@ public class Task8Test {
         });
         countriesWithZone.forEach(countryWithZone -> {
             webDriver.findElement(getCountryElementByText(countryWithZone)).click();
-            List<WebElement> zones = webDriver.findElements(By.cssSelector("[name$='][name]']"));
+            List<WebElement> zones = webDriver.findElements(By.xpath("//input[contains(@name,'][name]')]/.."));
             List<String> actualTextFromZones = getTextFromElements(zones);
             Assertions.assertThat(actualTextFromZones).isSorted().as("Список зон расположен не в алфавитном порядке")
                     .isEqualTo(actualTextFromZones);
