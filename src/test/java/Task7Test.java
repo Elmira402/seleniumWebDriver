@@ -27,7 +27,7 @@ public class Task7Test {
     public void clickAllItemsInMenuAndCheckHeaders() {
         webDriver.get("http://localhost/litecart/");
 
-        By allProductsXpath = By.xpath("//li[@class='product column shadow hover-light']");
+        By allProductsXpath = By.xpath("//div[@class='box']//a[@class='link']");
         By stickersXpath = By.xpath(".//div[contains(@class,'sticker')]");
 
         List<WebElement> products = webDriver.findElements(allProductsXpath);
