@@ -6,8 +6,6 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -35,7 +33,7 @@ public class Task13Test {
             webDriver.findElement(By.cssSelector("li[class^='product']")).click();
             WebElement quantity = webDriver.findElement(By.id("cart")).findElement(By.className("quantity"));
 
-            if(isElementPresent(webDriver, By.name("options[Size]"))){
+            if (isElementPresent(webDriver, By.name("options[Size]"))) {
                 new Select(webDriver.findElement(By.name("options[Size]")))
                         .selectByIndex(1);
             }
@@ -46,7 +44,7 @@ public class Task13Test {
         }
 
         webDriver.findElement(By.id("cart")).findElement(By.xpath("//a[text()='Checkout »']")).click();
-        webDriver.findElements(By.name("cart_form")).forEach(e->{
+        webDriver.findElements(By.name("cart_form")).forEach(e -> {
             List<WebElement> elements = webDriver.findElements(By.xpath("//div[@id='order_confirmation-wrapper']//td[@class='sku']"));
             wait.until(visibilityOfElementLocated(By.name("remove_cart_item"))).click();
             wait.until(stalenessOf(elements.get(0)));
@@ -61,6 +59,7 @@ public class Task13Test {
             return false;
         }
     }
+
     @After
     public void stop() {
         webDriver.quit();
