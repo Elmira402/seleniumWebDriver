@@ -37,7 +37,7 @@ public class Task14Test {
 
         List<String> fieldNames = Arrays.asList("iso_code_2", "iso_code_3", "tax_id_format", "address_format", "postcode_format", "currency_code", "phone_code");
         fieldNames.forEach(fieldName -> {
-            webDriver.findElement(By.name(fieldName)).findElement(By.xpath("//a[@target='_blank']"))
+            webDriver.findElement(By.xpath(String.format("//*[@name='%s']/..//a[@target='_blank']", fieldName)))
                     .click();
             String newWindow = wait.until(anyWindowOtherThan(windowHandles));
             webDriver.switchTo().window(newWindow);
